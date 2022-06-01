@@ -28,6 +28,7 @@ jobs:
           name: Back-End Deploy
           command: |
             npm run backend:deploy
+      # setting EB environment variables
       - run:
           name: Back-End EB Environment Variables
           command: |
