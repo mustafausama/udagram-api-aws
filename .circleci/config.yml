@@ -70,5 +70,17 @@ workflows:
   build_and_deploy:
     # Runing the frontend and backend jobs in parallel
     jobs:
-      - backend_build_and_deploy
-      - frontend_build_and_deploy
+      - backend_build_and_deploy:
+          # Filtering the job to run only with specific branches
+          filters:
+            branches:
+              only:
+                - main
+                - master
+      - frontend_build_and_deploy:
+          # Filtering the job to run only with specific branches
+          filters:
+            branches:
+              only:
+                - main
+                - master
