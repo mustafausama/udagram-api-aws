@@ -1,6 +1,11 @@
 # Udagram
 
+
+[![Mustafa](https://circleci.com/gh/mustafausama/udagram-api-aws.svg?style=shield)](https://circleci.com/gh/mustafausama/udagram-api-aws)
+
+
 [**Live application**](http://uda-gram-buck.s3-website-us-east-1.amazonaws.com/)
+
 
 Udagram is an application for users to create accounts and post feeds with captions and media provided.
 
