@@ -1,4 +1,5 @@
 version: 2.1
+# node, aws-cli, and eb-cli orbs
 orbs:
   node: circleci/node@5.0.2
   aws-cli: circleci/aws-cli@3.1.1
@@ -10,15 +11,19 @@ jobs:
     steps:
       - node/install
       - checkout
+      # setting up eb cli
       - eb/setup
+      # installing the backend dependencies
       - run:
           name: Back-end Install
           command: |
             npm run backend:install
+      # building the backend into www directory
       - run:
           name: Back-End Build
           command: |
             npm run backend:build
+      # deploying the backend from www directory to EB 
       - run:
           name: Back-End Deploy
           command: |
@@ -29,22 +34,27 @@ jobs:
     steps:
       - node/install
       - checkout
+      # setting up aws cli
       - aws-cli/setup:
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
           aws-region: AWS_DEFAULT_REGION
+      # installing the frontend dependencies
       - run:
           name: Front-End Install
           command: |
             npm run frontend:install
+      # running the frontend test script
       - run:
           name: Front-End Test
           command: |
             npm run frontend:test
+      # building the frontend into www directory
       - run:
           name: Front-End Build
           command: |
             npm run frontend:build
+      # deploying the frontend from www directory to S3 
       - run:
           name: Front-End Deploy
           command: |
@@ -52,6 +62,7 @@ jobs:
 workflows:
   version: 2
   build_and_deploy:
+    # Runing the frontend and backend jobs in parallel
     jobs:
       - backend_build_and_deploy
       - frontend_build_and_deploy
