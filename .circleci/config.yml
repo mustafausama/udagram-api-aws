@@ -28,6 +28,10 @@ jobs:
           name: Back-End Deploy
           command: |
             npm run backend:deploy
+      - run:
+          name: Back-End EB Environment Variables
+          command: |
+            eb setenv AWS_BUCKET=${AWS_BUCKET} AWS_PROFILE=${AWS_PROFILE} AWS_REGION=${AWS_DEFAULT_REGION} DB_PORT=${DB_PORT} JWT_SECRET=${JWT_SECRET} PORT=${PORT} POSTGRES_DB=${POSTGRES_DB} POSTGRES_HOST=${POSTGRES_HOST} POSTGRES_PASSWORD=${POSTGRES_PASSWORD} POSTGRES_USERNAME=${POSTGRES_USERNAME} URL=${URL}
   frontend_build_and_deploy:
     docker:
       - image: cimg/node:16.15.0
